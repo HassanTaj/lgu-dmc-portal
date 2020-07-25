@@ -12,7 +12,7 @@ from lib.uow.UnitOfWorkModule import *
 
 def home(request):
     uow: UnitOfWork = request.uow
-    uow.uniRepo.get_all()
+    uow.users_repo.get_all()
     assert isinstance(request, HttpRequest)
     return render(request, template_name='client/home.html')
 

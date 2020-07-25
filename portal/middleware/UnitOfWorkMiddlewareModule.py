@@ -8,6 +8,7 @@ from portal.config import settings
 class UnitOfWorkMiddleware(MiddlewareMixin):
     def __init__(self, get_response):
         self.get_response = get_response
+        # intialize unit of work
         self.uow: UnitOfWork = UnitOfWork(
             adapter=ConnectionStringAdapter(
                 ConnectionStringModel(
@@ -18,6 +19,8 @@ class UnitOfWorkMiddleware(MiddlewareMixin):
                 db_url=settings.SQLITE_DATABASE["url"]),
                 ConnectionType.sql_lite)
         )
+        # call the seed db method to seed default stuff in the db
+        self.uow.seed_default_entites()
         # One-time configuration and initialization.
 
     def process_request(self, request):

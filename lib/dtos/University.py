@@ -7,8 +7,9 @@ Base = declarative_base()
 
 class University(Base):
     def __int__(self, id=None, name=None):
-        pass
+        self.id = id
+        self.name = name
 
     __tablename__ = 'universities'
-    uni_id = Column(String, primary_key=True)
-    uni_name = Column(String)
+    id = Column(String, primary_key=True)
+    name = Column(String(256))
