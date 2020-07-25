@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Lee Haisen\Desktop\code_dump\python\django\dmc\venv"
+VIRTUAL_ENV="C:\Users\xterminate\Desktop\django\lgu-dmc-portal\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
