@@ -1,8 +1,18 @@
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 from .ConnectionStringAdapterModule import ConnectionStringAdapter
+# import all the dto here and leave the rest to Base
+from lib.dtos.Role import Role, Base
+from lib.dtos.User import User, Base
+from lib.dtos.UserRole import UserRole, Base
+from lib.dtos.Student import Student, Base
+from lib.dtos.Semester import Semester, Base
+from lib.dtos.StudentResult import StudentResult, Base
+from lib.dtos.StudentSemester import StudentSemester, Base
 from lib.dtos.University import University, Base
 
+
+# ==================================================
 
 class ConnectionFactory(object):
     # initialize connection helper with connection string
