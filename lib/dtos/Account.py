@@ -2,8 +2,8 @@ from lib.dtos.DeclarativeBaseContainer import *
 
 
 class Account(Base):
-    def __int__(self, id=None, user_name=None, email=None, email_confirmed=None,
-                password=None, password_hash=None,
+    def __int__(self, id=None, user_name=None, email=None,
+                email_confirmed=None, password=None, password_hash=None,
                 student_id=None, role_id=None, university_id=None):
         self.id = id
         self.user_name = user_name

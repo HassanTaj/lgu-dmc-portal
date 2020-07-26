@@ -45,12 +45,6 @@ class AccountRepository(BaseRepository):
             print(ex)
 
 
-# class UserRoleRepository(BaseRepository):
-#     def __init__(self, session):
-#         self.session = session
-#         super().__init__(self.session, UserRole, True)
-
-
 class RoleRepository(BaseRepository):
     def __init__(self, session):
         self.session = session

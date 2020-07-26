@@ -12,7 +12,7 @@ class ConnectionFactory(object):
 
         print('should create database here')
         if not database_exists(self.engine.url):
-            # create_database(self.engine.url)
+            create_database(self.engine.url)
             Base.metadata.create_all(bind=self.engine)
 
         # Base.metadata.drop_all(bind=self.engine)

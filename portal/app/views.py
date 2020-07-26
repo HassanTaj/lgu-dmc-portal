@@ -20,7 +20,7 @@ class Home(object):
     class Index(View):
         def get(self, request):
             uow: UnitOfWork = request.uow
-            uow.seed(doseed=False)
+            uow.seed(doseed=True)
             assert isinstance(request, HttpRequest)
             return render(request, template_name='client/home.html')
 
@@ -44,7 +44,7 @@ class Accounts(object):
             user: Account = uow.account_repo.get_by_username_or_password(uname=request.POST['uname'],
                                                                          pswd=request.POST['pswd'])
             if user is None:
-                return HttpResponseRedirect(reverse('login') + '?fucked=true')
+                return HttpResponseRedirect(reverse('login') + '?loginfailed=true')
 
             return HttpResponseRedirect(reverse('dashboard'))
 
