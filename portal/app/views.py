@@ -44,7 +44,7 @@ class Accounts(object):
             user: Account = uow.account_repo.get_by_username_or_password(uname=request.POST['uname'],
                                                                          pswd=request.POST['pswd'])
             if user is None:
-                return HttpResponseRedirect(reverse('login')+'?fucked=true')
+                return HttpResponseRedirect(reverse('login') + '?fucked=true')
 
             return HttpResponseRedirect(reverse('dashboard'))
 
