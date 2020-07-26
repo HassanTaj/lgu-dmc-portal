@@ -1,8 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
-from sqlalchemy.dialects.mssql import UNIQUEIDENTIFIER
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+from lib.dtos.DeclarativeBaseContainer import *
 
 
 class Role(Base):

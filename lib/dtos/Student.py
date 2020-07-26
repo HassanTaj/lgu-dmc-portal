@@ -1,13 +1,14 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
-from sqlalchemy.dialects.mssql import UNIQUEIDENTIFIER
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+from lib.dtos.DeclarativeBaseContainer import *
 
 
 class Student(Base):
-    def __int__(self, id=None, name=None):
+    def __int__(self, id=None, first_name=None, last_name=None, address=None, gender=None, major=None):
         self.id = id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.address = address
+        self.gender = gender
+        self.major = major
 
     __tablename__ = 'students'
     id = Column(String, primary_key=True)
@@ -16,6 +17,16 @@ class Student(Base):
     address = Column(String(256), nullable=False)
     gender = Column(String(10), nullable=False)
     major = Column(String(100), nullable=False)
-    # I have a question at this point will ask you when we are discussing this
-    dob = Column(DateTime("%(day)02d-%(month)02d-%(year)04d"))
-    email = Column(String(100), nullable=True)
+
+    results = relationship('lib.dtos.StudentResult.StudentResult', backref="students")
+
+# class Parent(Base):
+#     __tablename__ = 'parent'
+#     id = Column(Integer, primary_key=True)
+#     child_id = Column(Integer, ForeignKey('child.id'))
+#     child = relationship("Child", back_populates="parent")
+# 
+# class Child(Base):
+#     __tablename__ = 'child'
+#     id = Column(Integer, primary_key=True)
+#     parent = relationship("Parent", back_populates="child", uselist=False)

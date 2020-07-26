@@ -9,7 +9,7 @@ class BaseRepository(object):
     def __init__(self, session, query_type, has_uuid_primary_key: bool = False):
         self._session = session
         self.has_guid_as_primary = has_uuid_primary_key
-        self.query_type = query_type
+        self.query_type: query_type = query_type
 
     # this method gets all the shit from database table
     def get_all(self):
@@ -34,7 +34,7 @@ class BaseRepository(object):
     def update(self, id, obj):
         try:
             self._session.query(self.query_type).filter(self.query_type.id == id).update(obj, synchronize_session=False)
-                # .update({Customers.name: "Mr." + Customers.name}, synchronize_session=False)
+            # .update({Customers.name: "Mr." + Customers.name}, synchronize_session=False)
             self._session.commit()
         except Exception as ex:
             print(ex)

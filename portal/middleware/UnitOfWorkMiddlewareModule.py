@@ -19,8 +19,6 @@ class UnitOfWorkMiddleware(MiddlewareMixin):
                 db_url=settings.SQLITE_DATABASE["url"]),
                 ConnectionType.sql_lite)
         )
-        # call the seed db method to seed default stuff in the db
-        self.uow.seed_default_entites()
         # One-time configuration and initialization.
 
     def process_request(self, request):

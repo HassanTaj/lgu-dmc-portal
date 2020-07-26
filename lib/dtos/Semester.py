@@ -1,8 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime
-from sqlalchemy.dialects.mssql import UNIQUEIDENTIFIER
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+from lib.dtos.DeclarativeBaseContainer import *
 
 
 class Semester(Base):
@@ -12,4 +8,4 @@ class Semester(Base):
 
     __tablename__ = 'semesters'
     id = Column(String, primary_key=True)
-    name = Column(String, nullable=False)
+    number = Column(String, nullable=False)

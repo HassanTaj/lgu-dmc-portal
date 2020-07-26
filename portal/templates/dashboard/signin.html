@@ -6,34 +6,39 @@
             <div class="card-group mb-0">
                 <div class="card p-4">
                     <div class="card-block">
-                        <h1>Login</h1>
-                        <p class="text-muted">Sign In to your account</p>
-                        <div class="input-group mb-3">
+                        <form action="/dashboard/login/" method="post">
+                            {% csrf_token %}
+                            <h1>Login</h1>
+                            <p class="text-muted">Sign In to your account</p>
+                            <div class="input-group mb-3">
                                 <span class="input-group-addon"><i class="icon-user"></i>
                                 </span>
-                            <input type="text" class="form-control" placeholder="Username">
-                        </div>
-                        <div class="input-group mb-4">
+                                <input type="text" class="form-control" name="uname" placeholder="Username" value="leehaisen">
+                            </div>
+                            <div class="input-group mb-4">
                                 <span class="input-group-addon"><i class="icon-lock"></i>
                                 </span>
-                            <input type="password" class="form-control" placeholder="Password">
-                        </div>
-                        <div class="input-group mb-4">
+                                <input type="password" class="form-control" name="pswd" placeholder="Password" value="Abc123#">
+                            </div>
+                            <div class="input-group mb-4">
                                 <span class="input-group-addon"><i class="icon-graduation"></i>
                                 </span>
-                            <select class="form-control" id="ccyear">
-                                <option>Lahore Garrison University</option>
-                                <option>Garrison Degree Collage</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="button" class="btn btn-primary px-4">Login</button>
+                                <select class="form-control" id="ccyear">
+                                    <option value="-1" selected disabled>Select Your Institute</option>
+                                    {% for u in universities %}
+                                        <option value="{{ u.id }}">{{ u.name }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div class="col-6 text-right">
-                                <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary px-4">Login</button>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="card card-inverse card-primary py-5 d-md-down-none" style="width:44%">

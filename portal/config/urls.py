@@ -20,9 +20,10 @@ from django.contrib.auth.views import LoginView, LogoutView
 from portal.app import views, forms
 
 urlpatterns = [
-    path('login/', views.login, name='login'),
-    path('dashboard/', views.dashboard, name='dashboard'),
-    path('', views.home, name='home'),
+    path('dashboard/login/', views.Accounts.Login.as_view(), name='login'),
+    path('dashboard/', views.Dashboard.Index.as_view(), name='dashboard'),
+    path('about/', views.Home.About.as_view(), name='about'),
+    path('', views.Home.Index.as_view(), name='home'),
 ]
 
 # path('admin/', admin.site.urls),
