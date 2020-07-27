@@ -1,0 +1,33 @@
+{% extends 'client/layout-home.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+    <h2>Contact Us</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <form>
+                <div class="form-group">
+                    <label class="inline_label">First Name</label>
+                    <input type="text" name="fname" value="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="inline_label">Last Name</label>
+                    <input type="text" name="lname" value="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="inline_label">Email</label>
+                    <input type="email" name="email" value="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="inline_label">Message</label>
+                    <textarea class="form-control" type="text" name="message" rows="8"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+            </div></div>
+{% endblock %}
