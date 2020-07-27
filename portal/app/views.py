@@ -33,6 +33,13 @@ class Home(object):
                 'title': 'About',
             })
 
+    class Contact(View):
+        def get(self, request):
+            assert isinstance(request, HttpRequest)
+            return render(request, template_name='client/contact.html', context={
+                'title': 'Contact Us',
+            })
+
 
 # Accounts
 class Accounts(object):

@@ -54,6 +54,7 @@ urlpatterns = [
     path('dashboard/university/save/', views.Universities.Save.as_view(), name='su'),
     path('dashboard/universities/', views.Universities.Index.as_view(), name='universities'),
 
+    path('contact/', views.Home.Contact.as_view(), name='contact'),
     path('about/', views.Home.About.as_view(), name='about'),
     path('500/', views.Errors.Err500.as_view(), name='500'),
     path('', views.Home.Index.as_view(), name='home'),
