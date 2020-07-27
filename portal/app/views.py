@@ -69,7 +69,6 @@ class Accounts(object):
             item = None
             if id is not None and id != '':
                 item = uow.account_repo.get_by_id(id)
-
             return render(request, template_name="dashboard/account-form.html", context={
                 'model': item
             })
@@ -79,7 +78,7 @@ class Accounts(object):
                 uow: UnitOfWork = request.uow
                 model: Account = Account(
                     id=request.POST['id'],
-                    number=request.POST['semester_number']
+                    user_name=request.POST['u_name']
                 )
                 if model.id is not None and model.id != '':
                     uow.account_repo.update(model.id, model)
@@ -95,7 +94,7 @@ class Accounts(object):
             uow: UnitOfWork = request.uow
             if id is not None and id != '':
                 uow.account_repo.delete(Account(id=id))
-            return HttpResponseRedirect(reverse('semesters'))
+            return HttpResponseRedirect(reverse('accounts'))
 
 
 # Roles
