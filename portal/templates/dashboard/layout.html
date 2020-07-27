@@ -71,13 +71,22 @@
         <nav class="sidebar-nav">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/"><i class="icon-speedometer"></i> Dashboard
-                        {#                        <span class="badge badge-info">NEW</span>#}
-                    </a>
+                    <a class="nav-link" href="/"><i class="icon-speedometer"></i> Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="semester-list/"><i class="icon-list"></i> DMC
-                    </a>
+                    <a class="nav-link" href="/dashboard/universities/"><i class="icon-list"></i> Universities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/semesters/"><i class="icon-list"></i> Semesters</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/students/"><i class="icon-list"></i> Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/roles/"><i class="icon-list"></i> Roles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/dmcs/"><i class="icon-list"></i> DMC</a>
                 </li>
             </ul>
         </nav>
@@ -85,32 +94,11 @@
 
     <!-- Main content -->
     <main class="main">
-
-        <!-- Breadcrumb -->
-        {#            <ol class="breadcrumb">#}
-        {#                <li class="breadcrumb-item">Home</li>#}
-        {#                <li class="breadcrumb-item"><a href="#">Admin</a>#}
-        {#                </li>#}
-        {#                <li class="breadcrumb-item active">Dashboard</li>#}
-        {##}
-        {#                <!-- Breadcrumb Menu-->#}
-        {#                <li class="breadcrumb-menu d-md-down-none">#}
-        {#                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">#}
-        {#                        <a class="btn btn-secondary" href="#"><i class="icon-speech"></i></a>#}
-        {#                        <a class="btn btn-secondary" href="./"><i class="icon-graph"></i> &nbsp;Dashboard</a>#}
-        {#                        <a class="btn btn-secondary" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>#}
-        {#                    </div>#}
-        {#                </li>#}
-        {#            </ol>#}
-
-
-        <div class="container-fluid">
+        <div class="container-fluid mt-5">
             <div class="animated fadeIn">
-                {#            replace able content #}
                 {% block content %}{% endblock %}
             </div>
         </div>
-        <!-- /.conainer-fluid -->
     </main>
 
     <aside class="aside-menu">
@@ -418,6 +406,29 @@
     <span class="float-right">Powered by <a href="http://coreui.io">CoreUI</a></span>
 </footer>
 
+<div class="modal fade" id="app-modal" style="display: none;"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>One fine body…</p>
+            </div>
+            {#            <div class="modal-footer">#}
+            {#                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>#}
+            {#                <button type="button" class="btn btn-primary">Save changes</button>#}
+            {#            </div>#}
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <!-- Bootstrap and necessary plugins -->
 <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
 <script src="{% static 'bower_components/tether/dist/js/tether.min.js' %}"></script>
@@ -426,6 +437,29 @@
 <script src="{% static 'bower_components/chart.js/dist/Chart.min.js' %}"></script>
 <script src="{% static 'js/app.js' %}"></script>
 <script src="{% static 'js/views/main.js' %}"></script>
+<script>
+    $(function () {
+        $('.save-js').click(function (e) {
+            e.preventDefault();
+            var modal = $('#app-modal');
+            var content = $(modal).children('.modal-dialog').children('.modal-content');
+            var title = $(content).children('.modal-header').children('.modal-title');
+            var body = $(content).children('.modal-body');
+            $(title).text($(this).data('title'));
+            var url = $(this).data('url')
+            $.ajax({
+                url: url,
+                method: 'get'
+            }).done(function (res) {
+                $(body).html(res);
+                modal.modal();
+            }).fail(function (a, b, error) {
+                console.log(error);
+            });
+        });
+    });
+</script>
+
 {% block scripts %}{% endblock %}
 
 </body>

@@ -1,0 +1,17 @@
+<form action="/dashboard/role/save/" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ model.id }}">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="institute-name" placeholder="Enter institute name"
+                       value="{{ model.name }}">
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary ml-1">Save</button>
+    </div>
+</form>

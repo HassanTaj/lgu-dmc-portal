@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 from .ConnectionStringAdapterModule import ConnectionStringAdapter
+from .ConnectionTypeModule import ConnectionType
 from ..dtos.DeclarativeBaseContainer import Base
 
 
@@ -8,18 +9,18 @@ class ConnectionFactory(object):
     # initialize connection helper with connection string
     def __init__(self, connection_adapter: ConnectionStringAdapter = None):
         self.adapter: ConnectionStringAdapter = connection_adapter
-        self.engine = create_engine(self.adapter.getConnectionString(), echo=True)
-
-        print('should create database here')
-        if not database_exists(self.engine.url):
-            create_database(self.engine.url)
-            Base.metadata.create_all(bind=self.engine)
+        self.engine = create_engine(self.adapter.get_connection_string(), echo=False)
 
         # Base.metadata.drop_all(bind=self.engine)
-        # Base.metadata.create_all(bind=self.engine)
+        print('should create database here')
+        if not database_exists(self.engine.url):
+            if self.adapter.get_connection_type() == ConnectionType.sql_lite:
+                Base.metadata.create_all(bind=self.engine)
+            elif self.adapter.get_connection_type() == ConnectionType.postgres_sql:
+                create_database(self.engine.url)  # For postgres
 
     # get SqlAchemy Database Engine using this function
-    def getEngine(self):
+    def get_engine(self):
         try:
             # self.engine = create_engine(self.adapter.getConnectionString())
             return self.engine
@@ -27,7 +28,7 @@ class ConnectionFactory(object):
             print(engex)
 
     # get connection object after connecting with database through engine
-    def getConnection(self):
+    def get_connection(self):
         try:
             return self.engine.connect()
         except Exception as ex:

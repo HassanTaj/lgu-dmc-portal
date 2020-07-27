@@ -2,7 +2,8 @@ from lib.dtos.DeclarativeBaseContainer import *
 
 
 class Student(Base):
-    def __int__(self, id=None, first_name=None, last_name=None, address=None, gender=None, major=None):
+    def __int__(self, id=None, first_name=None, last_name=None, roll_number=None,
+                address=None, gender=None, major=None, university_id=None):
         self.id = id
         self.first_name = first_name
         self.last_name = last_name
@@ -14,10 +15,12 @@ class Student(Base):
     id = Column(String, primary_key=True)
     first_name = Column(String(256), nullable=False)
     last_name = Column(String(256), nullable=False)
+    roll_number = Column(String(256), nullable=False)
     address = Column(String(256), nullable=False)
     gender = Column(String(10), nullable=False)
     major = Column(String(100), nullable=False)
 
+    university_id = Column(String, ForeignKey('universities.id'))
     results = relationship('lib.dtos.StudentResult.StudentResult', backref="students")
 
 # class Parent(Base):

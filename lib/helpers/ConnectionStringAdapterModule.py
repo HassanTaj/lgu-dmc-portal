@@ -39,5 +39,8 @@ class ConnectionStringAdapter(object):
             self.conString = f"""postgresql://{con}"""
 
     # connection string builder
-    def getConnectionString(self):
+    def get_connection_string(self):
         return self.conString
+
+    def get_connection_type(self):
+        return self.connectionType

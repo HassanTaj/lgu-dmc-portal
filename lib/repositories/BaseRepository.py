@@ -15,6 +15,7 @@ class BaseRepository(object):
     def get_all(self):
         try:
             res = self._session.query(self.query_type).all()
+            self._session.close()
             return res
         except Exception as ex:
             print(ex)
@@ -33,10 +34,13 @@ class BaseRepository(object):
     # Update
     def update(self, id, obj):
         try:
-            self._session.query(self.query_type).filter(self.query_type.id == id).update(obj, synchronize_session=False)
+            model = self._session.query(self.query_type).filter(self.query_type.id==id).first()
+            model = obj
             # .update({Customers.name: "Mr." + Customers.name}, synchronize_session=False)
+            self._session.merge(model)
             self._session.commit()
         except Exception as ex:
+            self._session.rollback()
             print(ex)
 
     # delete a complete object
