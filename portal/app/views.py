@@ -17,7 +17,6 @@ class Home(object):
         This Class is just a wrapper where we can group all the views that will be used
         for clients view handling class based views
     """
-
     class Index(View):
         def get(self, request):
             uow: UnitOfWork = request.uow
