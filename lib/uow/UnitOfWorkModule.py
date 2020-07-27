@@ -11,7 +11,7 @@ class UnitOfWork(object):
         # get connection
         factory = ConnectionFactory(connection_adapter=self.connectionAdapter)
         # bind the engine with session
-        Session = sessionmaker(bind=factory.getEngine())
+        Session = sessionmaker(bind=factory.get_engine())
         # pass the session object to the repositories
         self.roles_repo = RoleRepository(Session())
         self.semesters_repo = SemesterRepository(Session())
