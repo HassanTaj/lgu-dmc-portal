@@ -9,8 +9,8 @@ class ConnectionFactory(object):
     # initialize connection helper with connection string
     def __init__(self, connection_adapter: ConnectionStringAdapter = None):
         self.adapter: ConnectionStringAdapter = connection_adapter
-        self.engine = create_engine(self.adapter.get_connection_string(), echo=False)
-
+        self.engine = create_engine(self.adapter.get_connection_string(), echo=False, check_same_thread=False if (
+                    self.adapter.get_connection_type() == ConnectionType.sql_lite) else True)
         # Base.metadata.drop_all(bind=self.engine)
         print('should create database here')
         if not database_exists(self.engine.url):
