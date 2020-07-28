@@ -17,12 +17,12 @@ class Account(Base):
 
     __tablename__ = 'accounts'
     id = Column(String, primary_key=True)
-    user_name = Column(String(50))
     password = Column(String)
+    user_name = Column(String(50))
     password_hash = Column(String)
-    dob = Column(DateTime("%(day)02d-%(month)02d-%(year)04d"))
     email = Column(String(100), nullable=True)
     email_confirmed = Column(Boolean, nullable=True)
+    dob = Column(DateTime("%(day)02d-%(month)02d-%(year)04d"))
 
     student_id = Column(String, ForeignKey('students.id'), nullable=True)
     # student = relationship('lib.dtos.Student.Student')

@@ -1,0 +1,87 @@
+{% extends 'dashboard/layout.html' %}
+
+{% block content %}
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Account
+            </div>
+            <div class="card-block">
+                <form action="/dashboard/account/save/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ model.id }}">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">User Name</label>
+                                <input type="text" class="form-control" name="user_name"
+                                       placeholder="Enter user name"
+                                       value="{{ model.user_name }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Email</label>
+                                <input type="email" class="form-control" name="email"
+                                       placeholder="Enter email"
+                                       value="{{ model.email }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password"
+                                       placeholder="Enter password"
+                                       value="{{ model.password }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% if students %}
+                            <div class="col-md-4 col-sm-12 hidden">
+                                <div class="form-group">
+                                    <label for="student_id">Student</label>
+                                    <select class="form-control" name="student_id">
+                                        <option value="-1" selected="selected" disabled="disabled">Select Student
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if roles %}
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="role_id">Role</label>
+                                    <select class="form-control" name="role_id">
+                                        <option value="-1" selected="selected" disabled="disabled">Select Role</option>
+                                        {% for role in roles %}
+                                            <option value="{{ role.id }}">{{ role.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if unis %}
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="university_id">Institute</label>
+                                    <select class="form-control" name="university_id">
+                                        <option value="-1" selected="selected" disabled="disabled">Select Institute
+                                        </option>
+                                        {% for role in unis %}
+                                            <option value="{{ role.id }}">{{ role.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary ml-1">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

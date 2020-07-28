@@ -8,25 +8,25 @@
                 <div class="card-header d-flex justify-content-between">
                     <span class="mt-1"><i class="fa fa-align-justify"></i> Roles</span>
                     <span>
-                        <span class="btn btn-sm m-auto btn-primary save-js" data-title="Role" data-url="/dashboard/role/save/">Creat</span>
+{#                        <span class="btn btn-sm m-auto btn-primary save-js" data-title="Role" data-url="/dashboard/role/save/">Creat</span>#}
                     </span>
                 </div>
                 <div class="card-block">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th width="250">Action(s)</th>
+{#                            <th width="250">Action(s)</th>#}
                         </tr>
                         </thead>
                         <tbody>
                         {% for m in roles %}
                             <tr>
                                 <td>{{ m.name }}</td>
-                                <td>
-                                    <span class="btn btn-sm btn-secondary save-js" data-title="Role" data-url="/dashboard/role/save/{{ m.id }}">Update</span>
-                                    <a class="btn btn-sm btn-danger" href="/dashboard/role/delete/{{ m.id }}">Delete</a>
-                                </td>
+{#                                <td>#}
+{#                                    <span class="btn btn-sm btn-secondary save-js" data-title="Role" data-url="/dashboard/role/save/{{ m.id }}">Update</span>#}
+{#                                    <a class="btn btn-sm btn-danger" href="/dashboard/role/delete/{{ m.id }}">Delete</a>#}
+{#                                </td>#}
                             </tr>
                         {% endfor %}
                         </tbody>

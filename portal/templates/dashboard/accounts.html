@@ -8,14 +8,14 @@
                 <div class="card-header d-flex justify-content-between">
                     <span class="mt-1"><i class="fa fa-align-justify"></i> Application Users</span>
                     <span>
-                        <span class="btn btn-sm m-auto btn-primary save-js" data-title="User" data-url="/dashboard/account/save/">Creat</span>
+                        <a class="btn btn-sm m-auto btn-primary" href="/dashboard/account/save/">Creat</a>
                     </span>
                 </div>
                 <div class="card-block">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>User Name</th>
                             <th width="250">Action(s)</th>
                         </tr>
                         </thead>
@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ m.user_name }}</td>
                                 <td>
-                                    <span class="btn btn-sm btn-secondary save-js" data-title="User" data-url="/dashboard/account/save/{{ m.id }}">Update</span>
+                                    <a class="btn btn-sm btn-secondary" href="/dashboard/account/save/{{ m.id }}">Update</a>
                                     <a class="btn btn-sm btn-danger" href="/dashboard/account/delete/{{ m.id }}">Delete</a>
                                 </td>
                             </tr>

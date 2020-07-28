@@ -17,10 +17,11 @@ class Home(object):
         This Class is just a wrapper where we can group all the views that will be used
         for clients view handling class based views
     """
+
     class Index(View):
         def get(self, request):
             uow: UnitOfWork = request.uow
-            uow.seed(doseed=True)
+            uow.seed(doseed=(uow.roles_repo.get_all() == 0))
             assert isinstance(request, HttpRequest)
             return render(request, template_name='client/home.html', context={
                 'title': 'Home',
@@ -76,7 +77,11 @@ class Accounts(object):
             if id is not None and id != '':
                 item = uow.account_repo.get_by_id(id)
             return render(request, template_name="dashboard/account-form.html", context={
-                'model': item
+                'title': 'Users',
+                'model': item,
+                'roles': uow.roles_repo.get_all(),
+                'unis': uow.universities_repo.get_all(),
+                'students': uow.students_repo.get_all()
             })
 
         def post(self, request):
@@ -84,8 +89,21 @@ class Accounts(object):
                 uow: UnitOfWork = request.uow
                 model: Account = Account(
                     id=request.POST['id'],
-                    user_name=request.POST['u_name']
+                    user_name=request.POST['user_name'],
+                    email=request.POST['email'],
+                    password=request.POST['password'],
+                    email_confirmed=False,
                 )
+
+                if 'university_id' in request.POST:
+                    model.university_id = request.POST['university_id']
+
+                if 'role_id' in request.POST:
+                    model.role_id = request.POST['role_id']
+
+                if 'student_id' in request.POST:
+                    model.student_id = request.POST['student_id']
+
                 if model.id is not None and model.id != '':
                     uow.account_repo.update(model.id, model)
                 else:
@@ -302,8 +320,60 @@ class Students(object):
             return HttpResponseRedirect(reverse('students'))
 
 
+# Results
+class Results(object):
+    class Index(View):
+        def get(self, request):
+            uow: UnitOfWork = request.uow
+            return render(request, template_name="dashboard/results.html", context={
+                'title': 'Results',
+                'list': uow.student_results_repo.get_all()
+            })
+
+    class Save(View):
+        def get(self, request, id=None):
+            uow: UnitOfWork = request.uow
+            item = None
+            if id is not None and id != '':
+                item = uow.students_repo.get_by_id(id)
+
+            return render(request, template_name="dashboard/result-from.html", context={
+                'model': item
+            })
+
+        def post(self, request):
+            try:
+                uow: UnitOfWork = request.uow
+                model: StudentResult = StudentResult(
+                    id=request.POST['id'],
+                )
+                if 'student_id' in request.POST:
+                    model.student_id = request.POST['student_id']
+                if 'semester_id' in request.POST['semester_id']:
+                    model.semester_id = request.POST['semester_id']
+
+                if 'res_path' in request.POST['res_path']:
+                    model.res_path = request.POST['res_path']
+
+                if model.id is not None and model.id != '':
+                    uow.student_results_repo.update(model.id, model)
+                else:
+                    uow.student_results_repo.create(model)
+
+                return HttpResponseRedirect(reverse('students'))
+            except Exception as ex:
+                return HttpResponseRedirect(reverse('500'))
+
+    class Delete(View):
+        def get(self, request, id):
+            uow: UnitOfWork = request.uow
+            if id is not None and id != '':
+                uow.semesters_repo.delete(Student(id=id))
+            return HttpResponseRedirect(reverse('students'))
+
+
 # Errors
 class Errors(object):
     class Err500(View):
         def get(self, request):
-            return render(request, template_name="error/500.html", )
+            return render(request, template_name="error/500.html")
