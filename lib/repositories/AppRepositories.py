@@ -40,6 +40,7 @@ class AccountRepository(BaseRepository):
         try:
             res = self._session.query(self.query_type).filter(
                 self.query_type.user_name == uname and self.query_type.password == pswd)
+            self._session.close()
             return res[0]
         except Exception as ex:
             print(ex)
