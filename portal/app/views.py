@@ -62,6 +62,10 @@ class Accounts(object):
 
             return HttpResponseRedirect(reverse('dashboard'))
 
+    class Logout(View):
+        def get(self, request):
+            return HttpResponseRedirect(reverse('home'))
+
     class Index(View):
         def get(self, request):
             uow: UnitOfWork = request.uow

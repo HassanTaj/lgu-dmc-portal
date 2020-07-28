@@ -22,6 +22,7 @@ from portal.app import views, forms
 
 urlpatterns = [
     path('dashboard/login/', views.Accounts.Login.as_view(), name='login'),
+    path('dashboard/signout/', views.Accounts.Logout.as_view(), name='signout'),
     path('dashboard/', views.Dashboard.Index.as_view(), name='dashboard'),
 
     # Account

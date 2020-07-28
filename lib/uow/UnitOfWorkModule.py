@@ -44,6 +44,12 @@ class UnitOfWork(object):
                     email_confirmed=True,
                     password='Abc123#',
                 ))
+                self.account_repo.create(Account(
+                    user_name="developer",
+                    email='developer@gmail.com',
+                    email_confirmed=True,
+                    password='Abc123#',
+                ))
 
             # semesters
             if len(self.semesters_repo.get_all()) < 1:
