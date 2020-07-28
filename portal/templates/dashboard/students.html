@@ -22,7 +22,7 @@
                         <tbody>
                         {% for m in list %}
                             <tr>
-                                <td>{{ m.number }}</td>
+                                <td>{{ m.first_name }} {{ m.last_name }}</td>
                                 <td>
                                     <span class="btn btn-sm btn-secondary save-js" data-title="Role" data-url="/dashboard/student/save/{{ m.id }}">Update</span>
                                     <a class="btn btn-sm btn-danger" href="/dashboard/student/delete/{{ m.id }}">Delete</a>

@@ -28,7 +28,6 @@ class BaseRepository(object):
 
             self._session.add(obj)
             self._session.commit()
-            self._session.close()
         except Exception as ex:
             print(ex)
 
@@ -40,7 +39,6 @@ class BaseRepository(object):
             # .update({Customers.name: "Mr." + Customers.name}, synchronize_session=False)
             self._session.merge(model)
             self._session.commit()
-            self._session.close()
         except Exception as ex:
             self._session.rollback()
             print(ex)
@@ -51,7 +49,6 @@ class BaseRepository(object):
             m = self.get_by_id(obj.id)
             self._session.delete(m)
             res = self._session.commit()
-            self._session.close()
             return res
         except Exception as ex:
             print(ex)
@@ -60,7 +57,6 @@ class BaseRepository(object):
     def get_by_id(self, id):
         try:
             res = self._session.query(self.query_type).filter(self.query_type.id == id)
-            self._session.close()
             return res[0]
         except Exception as ex:
             print(ex)

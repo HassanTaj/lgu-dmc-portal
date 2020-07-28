@@ -21,7 +21,7 @@ class Home(object):
     class Index(View):
         def get(self, request):
             uow: UnitOfWork = request.uow
-            uow.seed(doseed=(uow.roles_repo.get_all() == 0))
+            # uow.seed(doseed=True)
             assert isinstance(request, HttpRequest)
             return render(request, template_name='client/home.html', context={
                 'title': 'Home',

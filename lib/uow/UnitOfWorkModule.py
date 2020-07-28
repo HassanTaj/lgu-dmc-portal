@@ -61,6 +61,7 @@ class UnitOfWork(object):
                     self.students_repo.create(Student(
                         first_name=f'FN-{i}',
                         last_name=f'LN-{i}',
+                        roll_number=f'rollfck-{i}',
                         address=f'somewhere int the world {i}',
                         major=f'Computer Science',
                         gender='male'
